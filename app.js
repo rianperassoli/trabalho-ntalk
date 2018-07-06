@@ -60,7 +60,7 @@ load().include('models')
 .then('routes')
 .into(app);
 
-load().include('sockets').into(io);
+load().include('sockets').into(app, io);
 
 
 // Executa após as rotas se não encontrado
