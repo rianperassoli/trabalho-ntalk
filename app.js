@@ -1,6 +1,5 @@
 var express = require('express')
 , http = require('http')
-, socketIO = require('socket.io')
 , load = require('consign')
 , cookieParser = require('cookie-parser')
 , session = require('express-session')
@@ -39,15 +38,17 @@ load().include('models')
 .then('routes')
 .into(app);
 
+load().include('sockets').into(io);
 
 
-io.sockets.on('connection', function (client) {
+
+/*io.sockets.on('connection', function (client) {
 	client.on('send-server', function (data) {
 		var msg = "<b>"+data.nome+":</b> "+data.msg+"<br>";
 		client.emit('send-client', msg);
 		client.broadcast.emit('send-client', msg);
 	});
-});
+});*/
 
 
 
