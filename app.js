@@ -12,6 +12,9 @@ var express = require('express')
 , io = require('socket.io')(server);
 
 
+var store = new session.MemoryStore();
+var cookie = require('cookie');
+
 // ...código do stack de configurações...
 mongoose.connect('mongodb://localhost/ntalk');
 global.db = mongoose.connection;
@@ -31,6 +34,25 @@ app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 
 
+io.use((socket, next) => {
+	const cookieData = socket.request.headers.cookie;
+	const cookieObj = cookie.parse(cookieData);
+	const sessionHash = cookieObj['ntalk'] || '';
+	const sessionID = sessionHash.split('.')[0].slice(2);
+
+	store.all((err, sessions) => {
+		const currentSession = sessions[sessionID];
+
+		if (err || !currentSession) {
+			return next(new Error('Acesso negado!'));
+		}
+
+		socket.handshake.session = currentSession;
+		return next();
+	});
+});
+
+
 
 // ...código da função load()...
 load().include('models')
@@ -39,17 +61,6 @@ load().include('models')
 .into(app);
 
 load().include('sockets').into(io);
-
-
-
-/*io.sockets.on('connection', function (client) {
-	client.on('send-server', function (data) {
-		var msg = "<b>"+data.nome+":</b> "+data.msg+"<br>";
-		client.emit('send-client', msg);
-		client.broadcast.emit('send-client', msg);
-	});
-});*/
-
 
 
 // Executa após as rotas se não encontrado
