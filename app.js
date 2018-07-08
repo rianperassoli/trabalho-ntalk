@@ -26,7 +26,8 @@ app.use(session({
     secret: "abc123",
     name: 'ntalk',
     resave: true,
-    saveUninitialized: true
+	saveUninitialized: true,
+	store: store
 }));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
