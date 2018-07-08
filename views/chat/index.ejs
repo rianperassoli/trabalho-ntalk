@@ -18,14 +18,19 @@
 </script>
 
 <header>
-	<h2>Ntalk - Chat</h2>
+    <h2 class="form-signin-heading">NTalk - <small>Chat</small></h2>
+    <hr/><br/>
 </header>
 
 <section>
-	<pre id="chat"></pre>
+	<div class="container">
+		<pre id="chat"></pre>
+	</div>
 	
-	<input type="text" id="msg" placeholder="Mensagem">
-	<button onclick="enviar();">Enviar</button>
+	<div class="container form-inline">
+		<input type="text" id="msg" class="form-control" placeholder="Mensagem">
+		<button onclick="enviar();" class="btn btn-default">Enviar</button>
+	</div>
 </section>
 
 <% include ../exit %>

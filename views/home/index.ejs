@@ -1,20 +1,22 @@
 <% include ../header %>
 
-<header>
-    <h1>Ntalk</h1>
-    <h4>Bem-vindo!</h4>
-</header>
+<div class="container">
 
-<section>
-    <form action="/entrar" method="post">
-        <input type="text" name="usuario[nome]" placeholder="Digite o nome">
-        <br>
+  <form class="form-signin" action="/entrar" method="post">
+    <h2 class="form-signin-heading">NTalk - <small>bem-vindo!</small></h2>
 
-        <input type="text" name="usuario[email]" placeholder="Digite o e-mail">
-        <br>
-        
-        <button type="submit">Entrar</button>
-    </form>
-</section>
+    <label for="nome" class="sr-only">Nome</label>
+    <input type="text" id="nome" name="usuario[nome]" class="form-control" placeholder="Digite o nome" required autofocus>
+
+
+    <label for="email" class="sr-only">E-mail</label>
+    <input type="email" id="email" name="usuario[email]" class="form-control" placeholder="Digite o e-mail" required>
+
+                
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+  </form>
+
+</div> 
+
 
 <% include ../footer %>
