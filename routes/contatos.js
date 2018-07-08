@@ -1,6 +1,7 @@
 module.exports = function(app) {
     var autenticar = require('./../middleware/autenticator')
         , contatos = app.controllers.contatos;
+        
     app.get('/contatos', autenticar, contatos.index);
     app.get('/contato/:id', autenticar, contatos.show);
     app.post('/contato', autenticar, contatos.create);

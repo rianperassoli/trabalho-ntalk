@@ -6,6 +6,7 @@
 	const socket = io();
 	const sala = '<%- sala %>';
 	socket.emit('create-room', sala);
+
 	socket.on('send-client', (msg) => {
 		document.getElementById('chat').innerHTML += msg;
 	});
@@ -22,8 +23,8 @@
 
 <section>
 	<pre id="chat"></pre>
-	<input type="text" id="msg" placeholder="Mensagem">
 	
+	<input type="text" id="msg" placeholder="Mensagem">
 	<button onclick="enviar();">Enviar</button>
 </section>
 
